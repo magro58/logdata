@@ -30,7 +30,6 @@ if(isset($_POST['submit']))
 	$sesso= $_POST['sesso'];
 	$_SESSION['sesso']=$sesso;	
         $host  = $_SERVER['HTTP_HOST'];
-        //root of the file
         $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
         $save= 'saveDB.php?mySessionID='.$mySessionID;              
         header("Location: http://$host$uri/$save");
@@ -63,18 +62,18 @@ $title="Inserisci i tuoi dati";
         background-color: black;
         }
         </style>
-        <title>FormPHP</title>
+        <title>PHPRegistration</title>
         <link rel="stylesheet" href="css/stili.css?<?php echo time();" type="text/css">
         </head>
-        <body >
-        <div  >
+        <body>
+        <div>
         <form  action="{$_SERVER['PHP_SELF']}" method="POST" name="invio">
           <div id="titolo"><b>$title</b></div>
-          <div class="testo">Cognome</div>
+          <div class="testo">Cognome:</div>
           <input class="casella" type="text" name="cognome"  placeholder="Inserisci qui il tuo cognome" value='$cognome'/>
-          <div class="testo">Nome</div>
+          <div class="testo">Nome:</div>
           <input class="casella" type="text" name="nome" placeholder="Inserisci qui il tuo nome" value='$nome'/>
-          <div class="testo">Sesso </div>
+          <div class="testo">Sesso: </div>
           <div class="testo1 ">
           <input id="maschio" name="sesso" type=radio value="Maschio"><label for="Maschio" >  M</label>
             </div>
@@ -82,16 +81,20 @@ $title="Inserisci i tuoi dati";
           <input id="Femina" name="sesso" type=radio value="Femmina" checked> <label for="Femmina">F</label>
           </div>
           <br>
-          <div class="testo">Codice Fisicale</div>
+          <div class="testo">Codice Fisicale:</div>
           <input class="casella" type="text" name="cf"  placeholder="Inserisci qui il tuo codice fiscale" value='$cf'/>
-          <div class="testo">Indirizzo eMail</div>
+          <div class="testo">EMail:</div>
           <input class="casella" type="text" name="email" placeholder="inserisci qui il tuo indirizzo eMail" value='$email'/>
-          <div class="testo">Password</div>
+          <div class="testo">Password:</div>
           <input class="casella" type="password" name="pass" placeholder="Inserisci qui la tua password" value='$pass'/>
         <input type="hidden" name="mySessionID" value='$mySessionID'>  
-          <p>
-           <button id="conf" name="submit" type="submit">conferma</button><button id="canc" type="reset">Annulla</button>
+          
+        <p>
+        <CENTER>
+           <button id="conf" name="submit" type="submit">Conferma</button>&nbsp&nbsp&nbsp<button id="canc" type="reset">Annulla</button>
+           </CENTER>
            </p>
+           
         </form>
         </div>
         </body>

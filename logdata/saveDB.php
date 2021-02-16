@@ -16,10 +16,10 @@ if(isset($_POST['submit']))
 	} 
         else       
         $mySessionID=$_SESSION['mySessionID'];
-	$pw=$_SESSION['pw'];
-	$cognome=$_SESSION['cognome'];
+	$pass=$_SESSION['pass'];
+	$cf=$_SESSION['cf'];
 	$nome =$_SESSION['nome'];
-	$codice=$_SESSION['codice'];
+	$cf=$_SESSION['cf'];
 	$email=$_SESSION['email'];
 	$sesso=$_SESSION['sesso'];
 	
@@ -34,7 +34,7 @@ if(isset($_POST['submit']))
 	else
         {
             
-            mysqli_query($conn,"insert into Utente (Cognome, Nome, Sesso, CodiceFiscale) values ('$cognome','$nome','$sesso','$codice')");
+            mysqli_query($conn,"insert into Utente (Cognome, Nome, Sesso, CodiceFiscale) values ('$cognome','$nome','$sesso','$cf')");
             $result=mysqli_query($conn,"select idUtente from datiUtente where nome ='$nome' and cognome='$cognome'");
             if ($result==FALSE || $result->num_rows !=1)
             {
@@ -46,8 +46,8 @@ if(isset($_POST['submit']))
                 $row = $result->fetch_assoc();
                 $id=$row["idUtente"];
                 $result->close();
-                $pw=md5($pw);
-                $result=mysqli_query($conn,"insert into DatiSensibili (Password, Mail, idUtente) values ('$pw','$email','$id')");
+                $pass=md5($pass);
+                $result=mysqli_query($conn,"insert into DatiSensibili (Password, Mail, idUtente) values ('$pass','$email','$id')");
                 if ($result==FALSE)
                 {
                     $ErrForm="Errore durante inserimento credenziali";
@@ -79,7 +79,7 @@ else
 	$pw=$_SESSION['pw'];
 	$cognome="Cognome: ".$_SESSION['cognome'];
 	$nome = "Nome:".$_SESSION['nome'];
-	$codice= "Codice Fisicale: ".$_SESSION['codice'];
+	$cf= "Codice Fisicale: ".$_SESSION['cf'];
 	$email= "Indirizzo eMail: ".$_SESSION['email'];
 	$sesso= "Sesso: ".$_SESSION['sesso'];
 	$ErrForm="";
@@ -94,17 +94,17 @@ else
    	<!DOCTYPE html>
 	   <html>
 	   <head>
-	   <title> My site</title>
+	   <title>PHPSaveOnDataBase</title>
 	   <link rel="stylesheet" href="css/stili.css" type="text/css">
 	   </head>
-	   <body >
-	   <div >
+	   <body>
+	   <div>
 	   <form   action='$url' method="POST" name="invio">
 		 <div id="titolo" >$title</div>
 		 <div class="testo2" $hidden>$cognome</div>
 		 <div class="testo2" $hidden>$nome</div>
 		 <div class="testo2" $hidden>$sesso</div>
-		 <div class="testo2" $hidden>$codice</div>
+		 <div class="testo2" $hidden>$cf</div>
 		 <div class="testo2" $hidden>$email</div>
 		 <div class="testo2" $hidden>Password: ***********</div>
 		  <input type="hidden" name="mySessionID" value='$mySessionID'>
